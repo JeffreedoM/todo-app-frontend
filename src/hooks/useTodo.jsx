@@ -17,7 +17,7 @@ const useTodo = () => {
     dispatch({ type: "TOGGLE_TODO", payload: { id, isCompleted } });
 
     try {
-      const response = await axios.put(`todo/updateCompleted${id}`, {
+      const response = await axios.put(`todo/updateCompleted/${id}`, {
         isCompleted,
       });
       if (!response) {
