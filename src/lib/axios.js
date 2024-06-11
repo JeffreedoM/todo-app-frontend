@@ -33,9 +33,9 @@ axios.interceptors.response.use(null, (err) => {
     case 403:
       error.message = "You're not allowed to do that.";
       break;
-    // case 401:
-    //   error.message = "Please re-login.";
-    //   break;
+    case 401:
+      error.message = "Wrong login credentials. Please re-login.";
+      break;
     default:
       error.message = "Something went wrong. Please try again later.";
       break;
