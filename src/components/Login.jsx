@@ -11,10 +11,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const { login, error, isLoading } = useLogin();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    login(username, password);
+    await login(username, password);
   };
 
   return (
