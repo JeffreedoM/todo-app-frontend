@@ -9,7 +9,11 @@ export default {
         accent: "#9d8189",
         light: "#fff",
         dark: "#000",
+        ["secondary-hover"]: "#f6b8ae",
+        ["accent-hover"]: "#8a7279",
+        destructive: "#ff0000",
       },
+
       fontFamily: {
         "pally-bold": ["Pally-Bold", "sans-serif"],
         "pally-medium": ["Pally-Medium", "sans-serif"],

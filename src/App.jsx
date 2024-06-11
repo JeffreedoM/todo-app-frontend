@@ -1,34 +1,31 @@
-import { useEffect } from "react";
-import Navbar from "./components/Navbar";
-import TodoForm from "./components/TodoForm";
-import TodoList from "./components/TodoList";
-import useTodo from "./hooks/useTodo";
-import useTodoContext from "./hooks/useTodoContext";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import NotFoundPage from "./components/NotFoundPage";
+import useAuthContext from "./hooks/useAuthContext";
 
 function App() {
-  const { todos, dispatch } = useTodoContext();
-  const { getTodos } = useTodo();
-
-  useEffect(() => {
-    getTodos();
-  }, []);
-
-  console.log(todos);
-
+  const { isAuth } = useAuthContext();
   return (
-    <div className="h-screen bg-gradient-to-r from-primary to-secondary px-2 font-pally-regular lg:px-0">
-      <Navbar />
-      <TodoForm />
-      <div className="mx-auto mt-10 max-w-screen-md rounded-md bg-white px-4 py-2 font-pally-medium text-lg shadow-md">
-        {todos.length > 0 ? (
-          todos.map((todo) => <TodoList key={todo.id} todo={todo} />)
-        ) : (
-          <div className="my-4 text-center">
-            Your to-do list is empty. Add some tasks to get started!
-          </div>
-        )}
-      </div>
-    </div>
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={isAuth ? <Home /> : <Navigate replace to="/login" />}
+        />
+        {/* <Route path="/login" element={<Login />} /> */}
+        <Route
+          path="/login"
+          element={!isAuth ? <Login /> : <Navigate replace to="/" />}
+        />
+        <Route
+          path="/register"
+          element={!isAuth ? <Register /> : <Navigate replace to="/" />}
+        />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 }
 
