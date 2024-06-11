@@ -90,6 +90,7 @@ function Register() {
           <button
             onClick={handleRegister}
             type="submit"
+            disabled={isLoading || isLoginLoading}
             className="uppercas mb-6 w-full rounded-md bg-accent p-2 font-pally-medium text-lg text-light transition-colors ease-in-out hover:bg-accent-hover"
           >
             {isLoading
