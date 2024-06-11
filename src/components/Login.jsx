@@ -61,7 +61,7 @@ function Login() {
               {error && error.validation.password}
             </p>
           </div>
-          {/* {error ? error : ""} */}
+          <p className="mb-3.5 text-destructive">{error && error.message}</p>
           <button
             type="submit"
             className="uppercas mb-6 w-full rounded-md bg-accent p-2 font-pally-medium text-lg text-light transition-colors ease-in-out hover:bg-accent-hover"
