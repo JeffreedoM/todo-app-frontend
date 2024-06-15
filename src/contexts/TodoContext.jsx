@@ -13,7 +13,11 @@ const TodoReducer = (state, action) => {
         ...state,
         todos: state.todos.map((todo) =>
           todo.id === action.payload.id
-            ? { ...todo, name: action.payload.name }
+            ? {
+                ...todo,
+                name: action.payload.name,
+                isCompleted: action.payload.isCompleted,
+              }
             : todo,
         ),
       };

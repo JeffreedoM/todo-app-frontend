@@ -1,9 +1,9 @@
 import Axios from "axios";
 
-// export const BASE_URL = "http://localhost:8000/api";
-// export const sanctum = "http://localhost:8000/sanctum/csrf-cookie";
-const BASE_URL = "https://jeep-todo-api.vercel.app/api/api";
-export const sanctum = "https://jeep-todo-api.vercel.app/sanctum/csrf-cookie";
+export const BASE_URL = "http://localhost:8000/api";
+export const sanctum = "http://localhost:8000/sanctum/csrf-cookie";
+// const BASE_URL = "https://jeep-todo-api.vercel.app/api/api";
+// export const sanctum = "https://jeep-todo-api.vercel.app/sanctum/csrf-cookie";
 
 const axios = Axios.create({
   baseURL: BASE_URL,

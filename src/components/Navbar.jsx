@@ -12,6 +12,7 @@ function Navbar() {
       if (response) {
         setUser(null);
         setIsAuth(false);
+        localStorage.removeItem("token");
       }
       navigate("/login");
     } catch (error) {

@@ -23,7 +23,6 @@ const useTodo = () => {
       if (!response) {
         throw new Error("Failed to update todo");
       }
-      console.log(response);
     } catch (error) {
       // Revert optimistic update if the request fails
       dispatch({
@@ -38,7 +37,7 @@ const useTodo = () => {
     const { id, name, isCompleted } = todo;
 
     // Optimistically update the state
-    dispatch({ type: "UPDATE_TODO", payload: { id, name } });
+    dispatch({ type: "UPDATE_TODO", payload: { id, name, isCompleted } });
     try {
       const response = await axios.put(`todo/${id}`, {
         name,
@@ -50,7 +49,10 @@ const useTodo = () => {
       console.log(response);
     } catch (error) {
       // Optimistically update the state
-      dispatch({ type: "UPDATE_TODO", payload: { id, prevTodoName } });
+      dispatch({
+        type: "UPDATE_TODO",
+        payload: { id, prevTodoName, isCompleted },
+      });
       console.error(error);
     }
   };

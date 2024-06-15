@@ -4,17 +4,18 @@ import { FaEye } from "react-icons/fa";
 import { RiEyeCloseLine } from "react-icons/ri";
 import Navbar from "./Navbar.jsx";
 import useLogin from "../hooks/useLogin.jsx";
+import { FaCheck } from "react-icons/fa6";
 
 function Login() {
   const [togglePassword, setTogglePassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, isLoading } = useLogin();
+  const [remember, setRemember] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    await login(username, password);
+    await login(username, password, remember);
   };
 
   return (
@@ -61,14 +62,36 @@ function Login() {
               {error && error.validation.password}
             </p>
           </div>
+          <div className="mb-6 ml-1 flex items-center gap-x-2">
+            {!remember ? (
+              <>
+                <div
+                  onClick={() => setRemember(!remember)}
+                  className="flex h-[18px] w-[18px] cursor-pointer items-center justify-center rounded-sm border border-dark"
+                ></div>
+                <p className="pt-[2px] leading-none">Keep me signed in</p>
+              </>
+            ) : (
+              <>
+                <div
+                  onClick={() => setRemember(!remember)}
+                  className="flex h-[18px] w-[18px] cursor-pointer items-center justify-center rounded-sm border border-dark bg-accent text-sm text-light"
+                >
+                  <FaCheck />
+                </div>
+                <p className="pt-[2px] leading-none">Keep me signed in</p>
+              </>
+            )}
+          </div>
           <p className="mb-3.5 text-destructive">{error && error.message}</p>
           <button
             type="submit"
             disabled={isLoading}
-            className="uppercas mb-6 w-full rounded-md bg-accent p-2 font-pally-medium text-lg text-light transition-colors ease-in-out hover:bg-accent-hover"
+            className="uppercas mb-3 w-full rounded-md bg-accent p-2 font-pally-medium text-lg text-light transition-colors ease-in-out hover:bg-accent-hover"
           >
             {isLoading ? "Logging In..." : "Login"}
           </button>
+
           <div className="flex justify-center gap-1">
             <p>Don't have an account? </p>
             <Link

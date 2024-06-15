@@ -6,15 +6,15 @@ import useTodoContext from "../hooks/useTodoContext";
 
 function TodoList({ todo }) {
   const { updateCompleted, deleteTodo, getTodos, updateTodo } = useTodo();
-  const { todos } = useTodoContext();
+  const { todos, dispatch } = useTodoContext();
   const [completed, setCompleted] = useState(todo.isCompleted);
   const [toggleUpdateInput, setToggleUpdateInput] = useState(false);
   const updateTodoRef = useRef(null);
   const [todoName, setTodoName] = useState(todo.name);
 
   const handleCheck = () => {
-    const newCompleted = !completed;
-    setCompleted(newCompleted); // Optimistically update the UI
+    const newCompleted = completed === 1 ? 0 : 1;
+    setCompleted(newCompleted);
     updateCompleted(todo.id, newCompleted);
   };
 

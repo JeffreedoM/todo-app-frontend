@@ -7,9 +7,10 @@ const useLogin = () => {
   const { setUser, setIsAuth } = useAuthContext();
   const [isLoading, setIsLoading] = useState(false);
 
-  const login = async (username, password) => {
+  const login = async (username, password, remember) => {
     setIsLoading(true);
     setError(null);
+
     try {
       // get sanctum csrf cookie
       await axios.get(sanctum);
@@ -18,6 +19,7 @@ const useLogin = () => {
       const loginResponse = await axios.post("login", {
         email: username,
         password,
+        remember_me: remember,
       });
       const token = loginResponse.data.token;
 
@@ -28,6 +30,11 @@ const useLogin = () => {
       const { data } = await axios.get("user");
       setUser(data);
       setIsAuth(true);
+
+      if (remember) {
+        localStorage.setItem("token", JSON.stringify(token));
+      }
+
       setIsLoading(false);
     } catch (error) {
       console.error(error);
